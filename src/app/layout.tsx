@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import "../styles/globals.scss";
+import {ThemeProvider} from "@/components/ThemeSelector/internal";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -44,9 +45,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body className={`${manrope.variable} ${involve.variable}`}>
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

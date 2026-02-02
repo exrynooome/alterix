@@ -1,0 +1,86 @@
+.selector {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 32px;
+  box-shadow: inset 0 0 0 1px var(--BR);
+  background-color: var(--BG_2);
+  backdrop-filter: blur(32px);
+  width: 100%;
+
+  svg {
+    path {
+      stroke: var(--TX_1);
+    }
+  }
+}
+
+.slider {
+  position: absolute;
+  height: calc(100% - 8px);
+  background-color: var(--BR);
+  border-radius: 32px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  top: 4px;
+  left: 0;
+  z-index: 0;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 16px 9px 16px;
+  border-radius: 32px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+
+    svg {
+      path {
+        stroke: var(--BLUE);
+      }
+    }
+  }
+
+  &:focus {
+
+    svg {
+      path {
+        stroke: var(--BLUE);
+      }
+    }
+  }
+}
+
+.active {
+  background-color: transparent;
+
+  svg {
+    path {
+      stroke: var(--TX_0);
+    }
+  }
+
+  &:hover {
+    svg {
+      path {
+        stroke: var(--TX_0);
+      }
+    }
+  }
+
+  &:focus {
+    svg {
+      path {
+        stroke: var(--TX_0);
+      }
+    }
+  }
+}
