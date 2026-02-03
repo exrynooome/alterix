@@ -59,6 +59,7 @@
   inset: 0;
   z-index: 999;
   animation: fadeIn 0.3s ease-out;
+  touch-action: none;
 }
 
 @keyframes fadeIn {

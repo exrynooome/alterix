@@ -79,7 +79,6 @@ const Header: FunctionComponent = () => {
         };
     }, [isDragging, dragStartY]);
 
-    // Блокировка скролла body когда меню открыто
     useEffect(() => {
         if (isOpened) {
             document.body.style.overflow = 'hidden';
