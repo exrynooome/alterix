@@ -1,3 +1,11 @@
+.onlyDark {
+  --BR: rgba(255, 255, 255, 0.24);
+  --TX_0: #FFFFFF;
+  --BG_2: rgba(0, 0, 0, 0.32);
+  --TX_1:  rgba(255, 255, 255, 0.7);
+}
+
+
 .selector {
   position: relative;
   display: inline-flex;

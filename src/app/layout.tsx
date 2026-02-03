@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import "../styles/globals.scss";
 import {ThemeProvider} from "@/components/ThemeSelector/internal";
+import Header from "@/components/Header";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -47,7 +48,10 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${manrope.variable} ${involve.variable}`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+            <Header />
+            {children}
+        </ThemeProvider>
       </body>
     </html>
   );

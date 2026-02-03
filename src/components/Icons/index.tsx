@@ -126,7 +126,6 @@ interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name'> {
 export default function Icon({
                                  name,
                                  size = 24,
-                                 className = '',
                                  ...props
                              }: IconProps) {
     const IconComponent = icons[name];

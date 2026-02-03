@@ -9,7 +9,13 @@ function subscribe() {
     return () => {}
 }
 
-const ThemeSelector: FunctionComponent = () => {
+interface Props {
+    onlyDarkTheme: boolean;
+}
+
+const ThemeSelector: FunctionComponent<Props> = ({
+                                                      onlyDarkTheme
+                                                 }) => {
     const { theme, setTheme } = useTheme()
     const containerRef = useRef<HTMLDivElement>(null)
     const buttonsRef = useRef<(HTMLButtonElement | null)[]>([])
@@ -80,9 +86,9 @@ const ThemeSelector: FunctionComponent = () => {
     }
 
     return (
-        <div className={styles.selector} ref={containerRef}>
+        <div className={`${styles.selector} ${onlyDarkTheme ? styles.onlyDark : ''}`} ref={containerRef}>
             <div
-                className={styles.slider}
+                className={`${styles.slider}`}
                 style={{
                     width: `${indicatorStyle.width}px`,
                     transform: `translateX(${indicatorStyle.left}px)`,
