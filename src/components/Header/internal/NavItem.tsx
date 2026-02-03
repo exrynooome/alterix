@@ -32,10 +32,18 @@ const NavItem: FunctionComponent<Props> = (({children, id = '', mobile, onClick 
         return () => observer.disconnect()
     }, [])
 
+    const handleClick = () => {
+        if (onClick) {
+            onClick();
+        }
+    }
+
     return (
         <div className={`${styles.container}`}>
             <Link href={`/#${id}`}
-                  className={`${activeId === id ? styles.active : ''} ${styles.item} ${mobile ? styles.mobile : styles.desktop}`}>
+                  className={`${activeId === id ? styles.active : ''} ${styles.item} ${mobile ? styles.mobile : styles.desktop}`}
+                  onClick={handleClick}
+            >
                 {children}
             </Link>
         </div>

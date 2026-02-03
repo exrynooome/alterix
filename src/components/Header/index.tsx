@@ -155,22 +155,22 @@ const Header: FunctionComponent = () => {
                         <ThemeSelector onlyDarkTheme={true} />
                     </div>
                     <div className={styles.mobileItems}>
-                        <NavItem id={"main"} mobile={true}>
+                        <NavItem id={"main"} mobile={true} onClick={toggleMenu}>
                             Alterix
                         </NavItem>
-                        <NavItem id={"services"} mobile={true}>
+                        <NavItem id={"services"} mobile={true} onClick={toggleMenu}>
                             Услуги
                         </NavItem>
-                        <NavItem id={"stages"} mobile={true}>
+                        <NavItem id={"stages"} mobile={true} onClick={toggleMenu}>
                             Этапы
                         </NavItem>
-                        <NavItem id={"projects"} mobile={true}>
+                        <NavItem id={"projects"} mobile={true} onClick={toggleMenu}>
                             Проекты
                         </NavItem>
-                        <NavItem id={"order"} mobile={true}>
+                        <NavItem id={"order"} mobile={true} onClick={toggleMenu}>
                             Заказать
                         </NavItem>
-                        <NavItem id={"contacts"} mobile={true}>
+                        <NavItem id={"contacts"} mobile={true} onClick={toggleMenu}>
                             Контакты
                         </NavItem>
                     </div>
