@@ -1,0 +1,31 @@
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 196px;
+  overflow: hidden;
+
+  @media (max-width: 1279px) {
+    width: 100%;
+    padding: 0 64px;
+    gap: 128px;
+  }
+
+  @media (max-width: 959px) {
+    width: 100%;
+    padding: 0 32px;
+    gap: 128px;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 0 24px;
+    gap: 128px;
+  }
+  @media (max-width: 479px) {
+    width: 100%;
+    padding: 0 16px;
+    gap: 128px;
+  }
+}

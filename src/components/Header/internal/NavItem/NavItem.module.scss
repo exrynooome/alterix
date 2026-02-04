@@ -11,6 +11,7 @@
   line-height: normal;
   transition: color .15s ease, font-size .15s ease;
   user-select: none;
+  text-decoration: none;
   cursor: pointer;
   margin: 0;
   display: flex;
@@ -36,6 +37,10 @@
       font-size: 14.4px;
       color: var(--BLUE);
       padding: 11.7px 12.6px 12.6px;
+
+      &:focus {
+        text-decoration: none;
+      }
     }
   }
 

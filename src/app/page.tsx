@@ -1,31 +1,16 @@
-import styles from "./Page.module.scss"
+import Main from "@/app/_sections/Main";
+import Container from "@/components/Container";
+import Services from "@/app/_sections/Services";
 
 export default function Home() {
+
+    // sections: main, services, stages, projects, order, contacts
   return (
     <div>
-        <main className="pt-16">
-            <section id="main" className={styles.sec}>
-                <h1 className="text-6xl text-white font-bold">Начало</h1>
-            </section>
-            <section id="services" className={styles.sec}>
-                <h1 className="text-6xl text-white font-bold">Услуги</h1>
-            </section>
-
-            <section id="stages" className={styles.sec}>
-                <h1 className="text-6xl text-white font-bold">Этапы</h1>
-            </section>
-
-            <section id="projects" className={styles.sec}>
-                <h1 className="text-6xl text-white font-bold">Проекты</h1>
-            </section>
-
-            <section id="order" className={styles.sec}>
-                <h1 className="text-6xl text-white font-bold">Заказать</h1>
-            </section>
-            <section id="contacts" className={styles.sec}>
-                <h1 className="text-6xl text-white font-bold">Контакты</h1>
-            </section>
-        </main>
+        <Main />
+        <Container>
+            <Services />
+        </Container>
     </div>
   );
 }

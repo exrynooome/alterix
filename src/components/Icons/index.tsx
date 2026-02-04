@@ -1,4 +1,4 @@
-import {SVGProps} from 'react';
+import { SVGProps } from 'react';
 
 const SystemIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +97,7 @@ const AttachmentIcon = () => (
     </svg>
 )
 
-const icons = {
+const Icons = {
     system: SystemIcon,
     dark: DarkIcon,
     search: SearchIcon,
@@ -116,7 +116,7 @@ const icons = {
     attachment: AttachmentIcon,
 } as const;
 
-export type IconName = keyof typeof icons;
+export type IconName = keyof typeof Icons;
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name'> {
     name: IconName;
@@ -128,7 +128,7 @@ export default function Icon({
                                  size = 24,
                                  ...props
                              }: IconProps) {
-    const IconComponent = icons[name];
+    const IconComponent = Icons[name];
 
     return (
         <IconComponent
@@ -138,4 +138,4 @@ export default function Icon({
         />
     );
 }
-export { icons };
+export { Icons };
