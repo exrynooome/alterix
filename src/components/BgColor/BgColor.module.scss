@@ -1,0 +1,27 @@
+.bg {
+  filter: blur(300);
+  z-index: -1;
+
+  &.purple {
+    fill: #8E40C9;
+  }
+
+  &.blue {
+    fill: #3660EB;
+  }
+
+  &.light {
+    display: none;
+  }
+}
+
+.container {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  transform: translateX(-25%);
+  width: 2410px;
+  height: 837px;
+  z-index: -1;
+}

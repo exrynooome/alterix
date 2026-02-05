@@ -1,0 +1,129 @@
+.stages {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  overflow: visible;
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  max-width: 1200px;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stageContainer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 24px;
+  width: 500px;
+  box-sizing: border-box;
+}
+
+.stageHeader {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.stepBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100px;
+  padding: 8px 0;
+  box-shadow: inset 0 0 0 1px var(--BR);
+  border-radius: 32px;
+  flex-shrink: 0;
+
+  svg {
+    path {
+      stroke: var(--TX_0);
+    }
+  }
+
+  p {
+    padding-bottom: 2px;
+  }
+
+  &.active {
+    box-shadow: none;
+
+    @media (prefers-color-scheme: light) {
+      filter: none;
+    }
+
+    p {
+      color: #FFFFFF;
+    }
+
+    svg {
+      path {
+        stroke: #FFFFFF;
+      }
+    }
+  }
+
+  &.blue {
+    background-color: var(--BLUE);
+    filter: drop-shadow(0 4px 32px var(--BLUE)) drop-shadow(0 16px 72px var(--BLUE));
+
+    &.light {
+      filter: none;
+    }
+  }
+
+  &.red {
+    background-color: var(--RED);
+    filter: drop-shadow(0 4px 32px var(--RED)) drop-shadow(0 16px 72px var(--RED));
+
+    &.light {
+      filter: none;
+    }
+  }
+
+  &.green {
+    background-color: var(--GREEN);
+    filter: drop-shadow(0 4px 32px var(--GREEN)) drop-shadow(0 16px 72px var(--GREEN));
+
+    &.light {
+      filter: none;
+    }
+  }
+
+  &.yellow {
+    background-color: var(--YELLOW);
+    filter: drop-shadow(0 4px 32px var(--YELLOW)) drop-shadow(0 16px 72px var(--YELLOW));
+
+    &.light {
+      filter: none;
+    }
+  }
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-image: repeating-linear-gradient(
+                  to right,
+                  var(--BR) 0,
+                  var(--BR) 16px,
+                  transparent 16px,
+                  transparent 32px
+  );
+  margin: 0 8px;
+}
+
+.buttons {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}

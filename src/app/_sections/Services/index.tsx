@@ -6,7 +6,7 @@ import BorderSection from "@/components/BorderSection";
 const Services: FunctionComponent = () => {
 
     return (
-        <BorderSection id="services">
+        <BorderSection id="services" color="blue">
             <div className={styles.text_block}>
                 <div className={styles.text}>
                     <h4>Разрабатываем сайты</h4>
@@ -51,10 +51,9 @@ const Services: FunctionComponent = () => {
                         </defs>
                     </svg>
                     <div className={styles.filter} />
-                    <div className={styles.fixed} />
+                    <div className={`${styles.fixed} ${styles.sphere}`} />
                 </div>
             </div>
-            <div className={styles.bg} />
         </BorderSection>
     );
 };

@@ -1,6 +1,7 @@
 import React, {FunctionComponent} from "react";
 import styles from "./Button.module.scss";
 import Icon, {IconName} from "@/components/Icons";
+import ArrowButton from "@/components/Button/ArrowButton";
 
 type Props = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & {
     variant?: "blue" | "border";
@@ -41,3 +42,5 @@ const Button: FunctionComponent<Props> = ({
 )
 
 export default Button;
+
+export { ArrowButton };
