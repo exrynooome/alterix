@@ -4,11 +4,17 @@
   gap: 48px;
   overflow: visible;
   position: relative;
+
+  @media (max-width: 768px) {
+    h4 {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
 }
 
 .wrapper {
   position: relative;
-  max-width: 1200px;
 }
 
 .track {
@@ -21,8 +27,16 @@
   flex-direction: column;
   flex-shrink: 0;
   gap: 24px;
-  width: 500px;
+  width: 480px;
   box-sizing: border-box;
+
+  @media (max-width: 1280px) {
+    width: 432px;
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100% + 48px);
+  }
 }
 
 .stageHeader {

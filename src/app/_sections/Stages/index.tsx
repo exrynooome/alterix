@@ -10,7 +10,7 @@ import useTheme from "@/components/ThemeSelector/internal";
 const Stages: FunctionComponent = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
-    const { resolvedTheme } = useTheme();
+    const { theme } = useTheme();
 
     interface Stage {
         id: number;
@@ -99,7 +99,7 @@ const Stages: FunctionComponent = () => {
                     {stages.map((stage, index) => (
                         <div key={stage.id} className={styles.stageContainer}>
                             <div className={styles.stageHeader}>
-                                <div className={`${styles.stepBadge} ${index === currentStep ? `${styles.active} ${styles[stage.badgeColor]}` : ''} ${resolvedTheme === 'light' ? styles.light : ''}`}>
+                                <div className={`${styles.stepBadge} ${index === currentStep ? `${styles.active} ${styles[stage.badgeColor]}` : ''} ${theme === 'light' ? styles.light : ''}`}>
                                     <p className="text_24">{stage.id}</p>
                                     <Icon name={stage.icon} />
                                 </div>

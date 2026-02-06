@@ -1,3 +1,5 @@
+'use client'
+
 import React, {FunctionComponent} from "react";
 import styles from "./Services.module.scss";
 import Button from "@/components/Button";

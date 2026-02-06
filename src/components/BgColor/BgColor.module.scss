@@ -1,5 +1,5 @@
 .bg {
-  filter: blur(300);
+  filter: blur(150);
   z-index: -1;
 
   &.purple {
@@ -24,4 +24,31 @@
   width: 2410px;
   height: 837px;
   z-index: -1;
+  
+  @media (max-width: 1280px) {
+    bottom: auto;
+    transform: translateX(-33%);
+    top: 0;
+  }
+
+  @media (max-width: 960px) {
+    width: 2218px;
+    bottom: -41px;
+    transform: translateX(-39%);
+    top: auto;
+  }
+
+  @media (max-width: 768px) {
+    width: 1930px;
+    bottom: -18.44px;
+    transform: translateX(-51%);
+    top: auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 1810px;
+    bottom: -73px;
+    transform: translateX(-57%);
+    top: auto;
+  }
 }

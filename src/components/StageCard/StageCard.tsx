@@ -17,7 +17,7 @@ const StageCard: FunctionComponent<Props> = ({
         <div>
             <div className={styles.card}>
                 <p className="text_24">{title}</p>
-                <p className={`text_16 ${styles.description}`}>{description}</p>
+                <p className={`${styles.description}`}>{description}</p>
             </div>
         </div>
     )

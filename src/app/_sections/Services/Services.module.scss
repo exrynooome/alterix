@@ -8,7 +8,13 @@
 
   @media (max-width: 1280px) {
     align-items: center;
-    padding: 48px 70px 72px;
+    padding: 48px 40px 72px;
+    gap: 32px;
+  }
+
+  @media (max-width: 960px) {
+    align-items: center;
+    padding: 48px 40px 72px;
     gap: 32px;
   }
 
