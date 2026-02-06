@@ -66,12 +66,10 @@ const Stages: FunctionComponent = () => {
     ]
 
     const handleNext = () => {
-        console.log('Next clicked, current step:', currentStep);
         setCurrentStep(prev => Math.min(prev + 1, stages.length - 1));
     };
 
     const handlePrev = () => {
-        console.log('Prev clicked, current step:', currentStep);
         setCurrentStep(prev => Math.max(prev - 1, 0));
     };
 

@@ -3,11 +3,15 @@
   z-index: -1;
 
   &.purple {
-    fill: #8E40C9;
+    path {
+      fill: #8E40C9;
+    }
   }
 
   &.blue {
-    fill: #3660EB;
+    path {
+      fill: #3660EB;
+    }
   }
 
   &.light {

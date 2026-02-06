@@ -2,7 +2,7 @@
 
 import { FunctionComponent } from "react";
 import styles from "./Header.module.scss"
-import {NavItems} from "@/types/types";
+import { NavItems } from "@/types/types";
 import DesktopNav from "./internal/DesktopNav";
 import MobileNav from "./internal/MobileNav";
 

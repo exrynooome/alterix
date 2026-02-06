@@ -1,0 +1,18 @@
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @media (max-width: 768px) {
+    h4 {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+}

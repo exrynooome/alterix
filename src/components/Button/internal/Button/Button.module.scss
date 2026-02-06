@@ -61,8 +61,49 @@
     border-radius: 12px;
     color: var(--TX_0);
 
-    &:hover {
+    svg {
+      path {
+        stroke: var(--TX_0);
+      }
+    }
 
+    &:hover {
+      box-shadow: inset 0 0 0 1px var(--BLUE);
+      color: var(--BLUE);
+
+      svg {
+        path {
+          stroke: var(--BLUE);
+        }
+      }
+    }
+
+    &:active {
+      width: 95%;
+      height: 95%;
+      background-color: var(--BLUE);
+      color: #FFFFFF;
+
+      svg {
+        path {
+          stroke: #FFFFFF;
+        }
+      }
+
+      &:hover {
+        box-shadow: none;
+        color: #FFFFFF;
+      }
+
+      &:focus {
+        background-color: var(--BLUE);
+        filter: none;
+      }
+    }
+
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.01);
+      filter: drop-shadow(0 0 2px var(--BLUE));
     }
   }
 }
