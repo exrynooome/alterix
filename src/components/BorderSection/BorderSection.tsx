@@ -18,7 +18,7 @@ const BorderSection: FunctionComponent<Props> = ({
 
 
     return (
-        <section id={id} className={styles.container}>
+        <section id={id} className={`${styles.container} ${styles[color]}`}>
             <div className={styles.borderedBlock}>
                 {children}
             </div>

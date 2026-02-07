@@ -52,3 +52,11 @@ a {
 #__next {
   width: 100%;
 }
+
+section {
+  padding-top: 196px;
+
+  @media (max-width: 1280px) {
+    padding-top: 128px;
+  }
+}

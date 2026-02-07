@@ -9,7 +9,6 @@ type Props = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElemen
 }
 
 const Button: FunctionComponent<Props> = ({
-                                              className,
                                               onClick,
                                               href,
                                               children,
@@ -21,9 +20,7 @@ const Button: FunctionComponent<Props> = ({
     (
         <div className={styles.container}>
             <a
-                className={`${styles.button} ${variant === "blue" ? styles.blue : styles.border} ${
-                    className ? ` ${className}` : ""
-                }`}
+                className={`${styles.button} ${variant === "blue" ? styles.blue : styles.border}`}
                 onClick={onClick}
                 href={href}
                 {...props}
