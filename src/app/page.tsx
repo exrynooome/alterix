@@ -4,6 +4,7 @@ import Services from "@/app/_sections/Services";
 import Stages from "@/app/_sections/Stages";
 import Projects from "@/app/_sections/Projects";
 import Technologies from "@/app/_sections/Technologies";
+import BgColor from "@/components/BgColor";
 
 export default function Home() {
 
@@ -13,9 +14,11 @@ export default function Home() {
         <Main />
         <Container>
             <Services />
+            <BgColor color={"blue"} position={"above"} />
             <Stages />
             <Projects />
             <Technologies />
+            <BgColor color={"purple"} position={"above"} />
         </Container>
     </div>
   );

@@ -22,7 +22,6 @@ const BorderSection: FunctionComponent<Props> = ({
             <div className={styles.borderedBlock}>
                 {children}
             </div>
-            <BgColor color={color} />
         </section>
     )
 }
