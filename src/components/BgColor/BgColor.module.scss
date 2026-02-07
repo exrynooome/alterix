@@ -94,20 +94,6 @@
   animation: waveFloat1 25s ease-in-out infinite;
 }
 
-.wave2 {
-  filter: blur(120px);
-  opacity: 0.65;
-  animation: waveFloat2 30s ease-in-out infinite;
-  animation-delay: -8s;
-}
-
-.wave3 {
-  filter: blur(100px);
-  opacity: 0.4;
-  animation: waveFloat3 35s ease-in-out infinite;
-  animation-delay: -16s;
-}
-
 @keyframes waveFloat1 {
   0% {
     transform: translateX(0%) scale(1);
@@ -120,39 +106,6 @@
   }
   75% {
     transform: translateX(-5%) scale(1.01);
-  }
-  100% {
-    transform: translateX(0%) scale(1);
-  }
-}
-
-@keyframes waveFloat2 {
-  0% {
-    transform: translateX(0%) scale(1);
-  }
-  30% {
-    transform: translateX(10%) scale(1.03);
-  }
-  60% {
-    transform: translateX(-10%) scale(0.97);
-  }
-  85% {
-    transform: translateX(4%) scale(1.01);
-  }
-  100% {
-    transform: translateX(0%) scale(1);
-  }
-}
-
-@keyframes waveFloat3 {
-  0% {
-    transform: translateX(0%) scale(1);
-  }
-  35% {
-    transform: translateX(-12%) scale(1.04);
-  }
-  70% {
-    transform: translateX(12%) scale(0.96);
   }
   100% {
     transform: translateX(0%) scale(1);
