@@ -85,6 +85,10 @@
     }
   }
 
+  &:not(.active) {
+    filter: none !important;
+  }
+
   &.blue {
     background-color: var(--BLUE);
     filter: drop-shadow(0 4px 32px var(--BLUE)) drop-shadow(0 16px 72px var(--BLUE));
