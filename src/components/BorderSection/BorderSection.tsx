@@ -1,12 +1,11 @@
 'use client'
 
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import styles from './BorderSection.module.scss'
 
-type Props = {
+type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
     id: string;
     color: 'blue' | 'purple';
-    children: React.ReactNode;
 }
 
 const BorderSection: FunctionComponent<Props> = ({
