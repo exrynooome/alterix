@@ -1,0 +1,131 @@
+.input {
+  width: 100%;
+  color: var(--TX_0);
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  height: 52px;
+}
+
+.inputField {
+  width: 100%;
+  outline: none;
+  color: var(--TX);
+  border: none;
+  border-radius: 12px;
+  transition: color ease-in-out .15s, box-shadow ease-in-out .15s;
+  box-shadow: inset 0 0 0 1px var(--BR);
+  background-color: transparent;
+  padding: 13px 20px 14px;
+  font-size: 18px;
+  height: 52px;
+
+  &::placeholder {
+    color: var(--TX_1);
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px var(--BLUE);
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 0 1px var(--BLUE);
+  }
+
+  &.error {
+    box-shadow: inset 0 0 0 1px var(--RED);
+  }
+
+  &.error:focus {
+    box-shadow: inset 0 0 0 1px var(--RED);
+  }
+
+  &.left {
+    padding-left: 44px;
+  }
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+  width: 24px;
+  height: 24px;
+}
+
+.inputFooter {
+  margin-top: 4px;
+}
+
+.errorMessage {
+  color: var(--RED);
+}
+
+// file input
+
+.fileInput {
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+
+  svg {
+    path {
+      stroke: var(--TX_0);
+    }
+  }
+}
+
+.fileInputContainer {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  box-shadow: inset 0 0 0 1px var(--BR);
+  border-radius: 12px;
+  color: var(--TX_0);
+  padding: 0 0 0 24px;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px var(--BLUE);
+    color: var(--BLUE);
+
+    svg {
+      path {
+        stroke: var(--BLUE);
+      }
+    }
+  }
+
+  &:active {
+    box-shadow: inset 0 0 0 1px var(--BLUEAC);
+    color: var(--BLUEAC);
+
+    svg {
+      path {
+        stroke: var(--BLUEAC);
+      }
+    }
+  }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fileInputLabel {
+  padding: 0 8px 2px;
+}
+
+.fileField {
+  display: none;
+}
+

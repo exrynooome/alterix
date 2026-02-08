@@ -18,13 +18,10 @@
 .blurContainer {
   position: absolute;
   left: 50%;
-  width: 2410px;
-  height: 800px;
-  transform: translateX(-50%) translateZ(0);
-  filter: blur(150px);
-  overflow: hidden;
+  width: 2400px;
+  height: 837px;
+  transform: translateX(-50%);
   isolation: isolate;
-  will-change: contents;
 
   .below & {
     top: 0;
@@ -42,18 +39,22 @@
     --wave-color: #3660EB;
   }
 
+  @media (max-width: 1280px) {
+    width: 1440px;
+  }
+
   @media (max-width: 960px) {
-    max-width: 2218px;
+    width: 1440px;
   }
 
   @media (max-width: 768px) {
-    max-width: 1930px;
-    height: 600px;
+    width: 768px;
+    height: 737px;
   }
 
   @media (max-width: 480px) {
-    max-width: 1810px;
-    height: 500px;
+    width: 768px;
+    height: 637px;
   }
 }
 
@@ -64,51 +65,72 @@
   width: 100%;
   height: 50%;
   background: var(--wave-color);
+  filter: blur(150px);
 }
 
 .circle {
   position: absolute;
-  width: 1200px;
-  height: 1200px;
-  border-radius: 50%;
+  width: 1000px;
+  height: 500px;
+  border-radius: 1000px;
   background: var(--wave-color);
-  will-change: transform;
+  filter: blur(150px);
+
 
   @media (max-width: 768px) {
-    width: 600px;
-    height: 600px;
-  }
-
-  @media (max-width: 480px) {
-    width: 500px;
-    height: 500px;
+    width: 650px;
+    height: 650px;
   }
 }
 
 .circle__1 {
-  transform: translate(100%);
-  animation: circleMove1 30s ease-in-out infinite;
+  animation: circleMove1 50s ease-in-out infinite;
+
+  @media (max-width: 1280px) {
+    animation: circleMove3 50s ease-in-out infinite;
+  }
 }
 
 .circle__2 {
-  transform: translate(-40%);
-  animation: circleMove2 30s ease-in-out infinite;
+  animation: circleMove2 50s ease-in-out infinite;
+
+  @media (max-width: 1280px) {
+    animation: circleMove4 50s ease-in-out infinite;
+  }
 }
 
 @keyframes circleMove1 {
   0%, 100% {
-    transform: translateX(100%) translateY(0%);
+    transform: translateX(140%) translateY(20%);
   }
   50% {
-    transform: translateX(80%) translateY(10%);
+    transform: translateX(120%) translateY(30%);
   }
 }
 
 @keyframes circleMove2 {
   0%, 100% {
-    transform: translateX(-10%) translateY(10%);
+    transform: translateX(-20%) translateY(50%);
   }
   50% {
-    transform: translateX(-20%) translateY(0%);
+    transform: translateX(-50%) translateY(40%);
+  }
+}
+
+@keyframes circleMove3 {
+  0%, 100% {
+    transform: translateX(70%) translateY(-15%);
+  }
+  50% {
+    transform: translateX(50%) translateY(0%);
+  }
+}
+
+@keyframes circleMove4 {
+  0%, 100% {
+    transform: translateX(-60%) translateY(10%);
+  }
+  50% {
+    transform: translateX(-25%) translateY(20%);
   }
 }

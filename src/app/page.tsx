@@ -5,6 +5,7 @@ import Stages from "@/app/_sections/Stages";
 import Projects from "@/app/_sections/Projects";
 import Technologies from "@/app/_sections/Technologies";
 import BgColor from "@/components/BgColor";
+import Order from "@/app/_sections/Order";
 
 export default function Home() {
 
@@ -19,6 +20,7 @@ export default function Home() {
             <Projects />
             <Technologies />
             <BgColor color={"purple"} position={"above"} />
+            <Order />
         </Container>
     </div>
   );
