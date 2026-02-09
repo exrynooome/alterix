@@ -1,17 +1,20 @@
 .checkbox {
-  color: var(--TX_0);
 
-  &:focus {
-    text-decoration: underline;
-    color: var(--TX_0);
+}
+
+.checkboxError {
+  color: var(--RED);
+
+  :hover {
+    color: var(--RED);
   }
 
-  &:hover {
-    color: var(--BLUE);
+  :focus {
+    color: var(--RED);
   }
 
-  &:active {
-    color: var(--BLUEAC);
+  :active {
+    color: var(--RED);
   }
 }
 

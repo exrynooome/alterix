@@ -1,0 +1,31 @@
+.checkbox {
+  color: var(--TX_0);
+
+  &:focus {
+    text-decoration: underline;
+    color: var(--TX_0);
+  }
+
+  &:hover {
+    color: var(--BLUE);
+  }
+
+  &:active {
+    color: var(--BLUEAC);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
