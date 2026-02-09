@@ -1,12 +1,13 @@
 'use client'
 
-import React, { FunctionComponent, useState } from "react";
+import React, {FormEvent, FunctionComponent, useState} from "react";
 import styles from "./Form.module.scss";
 import Input from "@/components/Input";
 import FileInput from "@/components/Input/File";
 import Checkbox from "@/components/Checkbox";
 import Link from "@/components/Link";
 import Button from "@/components/Button";
+import {FormErrors, FormSubmitData} from "@/types/form";
 
 const Form: FunctionComponent = () => {
 
@@ -17,7 +18,7 @@ const Form: FunctionComponent = () => {
     const [file, setFile] = useState<File | null>(null);
     const [checked, setChecked] = useState<boolean>(false);
 
-    const [errors, setErrors] = useState({
+    const [errors, setErrors] = useState<FormErrors>({
         name: '',
         phone: '',
         email: '',
@@ -25,6 +26,8 @@ const Form: FunctionComponent = () => {
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [submitMessage, setSubmitMessage] = useState('');
 
     const validateEmail = (email: string): boolean => {
         if (!email) return true;
@@ -38,7 +41,7 @@ const Form: FunctionComponent = () => {
     };
 
     const validateForm = (): boolean => {
-        const newErrors = {
+        const newErrors: FormErrors = {
             name: '',
             phone: '',
             email: '',
@@ -83,10 +86,92 @@ const Form: FunctionComponent = () => {
         });
     };
 
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+        setSubmitMessage('');
+
+        try {
+            // Подготовка данных
+            const formData: FormSubmitData = {
+                name,
+                phone,
+                email,
+                comment,
+                timestamp: new Date().toISOString(),
+            };
+
+            // Если есть файл, конвертируем его в base64
+            if (file) {
+                const base64File = await fileToBase64(file);
+                formData.file = {
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    data: base64File
+                };
+            }
+
+            // Отправка на API роут
+            const response = await fetch('/api/submit-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setSubmitStatus('success');
+                setSubmitMessage(result.message || 'Заявка успешно отправлена!');
+
+                // Очистка формы
+                setName('');
+                setPhone('');
+                setEmail('');
+                setComment('');
+                setFile(null);
+                setChecked(false);
+
+                // Сброс статуса через 5 секунд
+                setTimeout(() => {
+                    setSubmitStatus('idle');
+                    setSubmitMessage('');
+                }, 5000);
+            } else {
+                setSubmitStatus('error');
+                setSubmitMessage(result.error || 'Ошибка при отправке формы');
+
+                setTimeout(() => {
+                    setSubmitStatus('idle');
+                    setSubmitMessage('');
+                }, 5000);
+            }
+
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            setSubmitStatus('error');
+            setSubmitMessage('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+
+            setTimeout(() => {
+                setSubmitStatus('idle');
+                setSubmitMessage('');
+            }, 5000);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.inputs}>
                     <Input
                         value={name}
