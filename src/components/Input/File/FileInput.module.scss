@@ -1,0 +1,81 @@
+.fileInput {
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+
+  svg {
+    path {
+      stroke: var(--TX_0);
+    }
+  }
+}
+
+.fileInputContainer {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  box-shadow: inset 0 0 0 1px var(--BR);
+  border-radius: 12px;
+  color: var(--TX_0);
+  padding: 0 0 0 24px;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px var(--BLUE);
+    color: var(--BLUE);
+
+    .text {
+      svg {
+        path {
+          stroke: var(--BLUE);
+        }
+      }
+    }
+
+    .fileLabel {
+        svg {
+          path {
+            stroke: var(--BLUE);
+          }
+        }
+      }
+    }
+
+  &:active {
+    box-shadow: inset 0 0 0 1px var(--BLUEAC);
+    color: var(--BLUEAC);
+
+    .text {
+      svg {
+        path {
+          stroke: var(--BLUEAC);
+        }
+      }
+    }
+  }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fileLabelNamed {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fileInputLabel {
+  padding: 0 8px 2px;
+}
+
+.fileField {
+  display: none;
+}

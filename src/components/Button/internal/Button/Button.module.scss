@@ -45,6 +45,11 @@
         font-size: 15.2px;
       }
 
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+
       .text {
         padding: 0 7.6px 1.9px;
       }
@@ -56,6 +61,7 @@
   }
 
   &.border {
+    height: 52px;
     background-color: transparent;
     box-shadow: inset 0 0 0 1px var(--BR);
     border-radius: 12px;

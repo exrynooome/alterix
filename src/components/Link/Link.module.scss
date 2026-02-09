@@ -1,0 +1,48 @@
+.link {
+  display: inline-block;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+
+  &.mainColor {
+    color: var(--TX_0);
+
+    &:focus {
+      text-decoration: underline;
+      color: var(--TX_0);
+    }
+  }
+
+  &.secondaryColor {
+    color: var(--TX_1);
+
+    &:focus {
+      text-decoration: underline;
+      color: var(--TX_1);
+    }
+  }
+
+  &:hover {
+    color: var(--BLUE);
+  }
+
+  &:active {
+    color: var(--BLUEAC);
+  }
+
+
+  /* sizes */
+
+  &.small {
+    font-size: 14px;
+  }
+
+  &.medium {
+    font-size: 16px;
+  }
+
+  &.large {
+    font-size: 24px;
+  }
+}
