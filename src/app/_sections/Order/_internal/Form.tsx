@@ -37,6 +37,12 @@ const Form: FunctionComponent = () => {
         });
     };
 
+    const clearFieldError = (fieldName: keyof FormErrors) => {
+        if (errors[fieldName]) {
+            setErrors(prev => ({ ...prev, [fieldName]: '' }));
+        }
+    };
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -113,7 +119,10 @@ const Form: FunctionComponent = () => {
                 <div className={styles.inputs}>
                     <Input
                         value={name}
-                        onChange={setName}
+                        onChange={(value) => {
+                            setName(value);
+                            clearFieldError('name')
+                        }}
                         type={"text"}
                         required={true}
                         placeholder="Имя *"
@@ -121,7 +130,10 @@ const Form: FunctionComponent = () => {
                     />
                     <Input
                         value={phone}
-                        onChange={setPhone}
+                        onChange={(value) => {
+                            setPhone(value);
+                            clearFieldError('phone')
+                        }}
                         validate={validatePhone}
                         type={"tel"}
                         required={true}
@@ -129,7 +141,10 @@ const Form: FunctionComponent = () => {
                         error={errors.phone}
                     />
                     <Input value={email}
-                           onChange={setEmail}
+                           onChange={(value) => {
+                               setEmail(value);
+                               clearFieldError('email')
+                           }}
                            validate={validateEmail}
                            type={"email"}
                            required={false}
