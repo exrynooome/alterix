@@ -17,6 +17,7 @@ interface FormData {
         data: string;
     };
     timestamp: string;
+    agreedToPolicy?: boolean;
 }
 
 async function getGoogleSheetsClient() {
@@ -70,6 +71,7 @@ export async function POST(request: NextRequest) {
             name: data.name,
             phone: data.phone,
             email: data.email,
+            agreedToPolicy: data.agreedToPolicy,
         });
 
         if (Object.keys(validationErrors).length > 0) {

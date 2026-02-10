@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FormEvent, FunctionComponent, useState } from "react";
+import React, {FormEvent, FunctionComponent, useState} from "react";
 import styles from "./Form.module.scss";
 import Input from "@/components/Input";
 import FileInput from "@/components/Input/File";
@@ -39,7 +39,10 @@ const Form: FunctionComponent = () => {
 
     const clearFieldError = (fieldName: keyof FormErrors) => {
         if (errors[fieldName]) {
-            setErrors(prev => ({ ...prev, [fieldName]: '' }));
+            setErrors(prev => {
+                const newErrors = { ...prev, [fieldName]: '' };
+                return newErrors;
+            });
         }
     };
 
@@ -53,11 +56,6 @@ const Form: FunctionComponent = () => {
             checkbox: ''
         });
 
-        if (!checked) {
-            setErrors(prev => ({ ...prev, checkbox: 'Необходимо согласие на обработку данных' }));
-            return;
-        }
-
         setIsSubmitting(true);
 
         try {
@@ -67,6 +65,7 @@ const Form: FunctionComponent = () => {
                 email,
                 comment,
                 timestamp: new Date().toISOString(),
+                agreedToPolicy: checked,
             };
 
             if (file) {
@@ -108,7 +107,7 @@ const Form: FunctionComponent = () => {
             }
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } finally {
             setIsSubmitting(false);
         }

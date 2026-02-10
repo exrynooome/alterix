@@ -12,6 +12,7 @@ export interface FormSubmitData {
     comment: string;
     timestamp: string;
     file?: FileData;
+    agreedToPolicy?: boolean;
 }
 
 export interface FormErrors {

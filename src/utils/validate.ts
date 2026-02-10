@@ -44,6 +44,7 @@ export const validateFormData = (data: {
     name: string;
     phone: string;
     email?: string;
+    agreedToPolicy?: boolean;
 }): FormValidationErrors => {
     const errors: FormValidationErrors = {};
 
@@ -72,6 +73,10 @@ export const validateFormData = (data: {
         if (emailValidationError) {
             errors.email = emailValidationError;
         }
+    }
+
+    if (!data.agreedToPolicy) {
+        errors.checkbox = 'Необходимо согласие на обработку данных';
     }
 
     return errors;
