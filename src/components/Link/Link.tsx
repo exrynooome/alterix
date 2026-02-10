@@ -6,6 +6,7 @@ type Props = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElemen
     size: "small" | "medium" | "large";
     variant: "mainColor" | "secondaryColor";
     href: string;
+    error?: string;
 }
 
 const TextLink: React.FC<Props> = ({
@@ -15,11 +16,12 @@ const TextLink: React.FC<Props> = ({
                                    href,
                                    children,
                                    variant,
+                                   error,
                                    ...props
                                }) => (
     (
         <Link
-            className={`${styles.link} ${styles[size]} ${styles[variant]} ${className ? ` ${styles[className]}` : ""}`}
+            className={`${styles.link} ${styles[size]} ${styles[variant]} ${className ? ` ${styles[className]}` : ""} ${error ? styles.error: ''}`}
             onClick={onClick}
             href={href}
             {...props}

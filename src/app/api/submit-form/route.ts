@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
-import { Readable } from 'stream';
+import { writeFile, mkdir } from 'fs/promises';
+import { join } from 'path';
+import { existsSync } from 'fs';
+import { validateFormData } from '@/utils/validate';
 
 interface FormData {
     name: string;
@@ -14,16 +17,6 @@ interface FormData {
         data: string;
     };
     timestamp: string;
-}
-
-function validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-function validatePhone(phone: string): boolean {
-    const phoneRegex = /^[\d\s\+\-\(\)]{10,}$/;
-    return phoneRegex.test(phone);
 }
 
 async function getGoogleSheetsClient() {
@@ -40,41 +33,32 @@ async function getGoogleSheetsClient() {
     return sheets;
 }
 
-async function uploadFileToDrive(fileData: {
-    name: string;
-    type: string;
-    data: string;
-}) {
+async function saveFileLocally(fileData: {
+                                            name: string;
+                                            type: string;
+                                            data: string;
+                                         }): Promise<string> {
     try {
-        const auth = new google.auth.GoogleAuth({
-            credentials: {
-                client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-                private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-            },
-            scopes: ['https://www.googleapis.com/auth/drive.file'],
-        });
-
-        const drive = google.drive({ version: 'v3', auth });
-
         const base64Data = fileData.data.split(',')[1];
         const buffer = Buffer.from(base64Data, 'base64');
 
-        const response = await drive.files.create({
-            requestBody: {
-                name: fileData.name,
-                mimeType: fileData.type,
-            },
-            media: {
-                mimeType: fileData.type,
-                body: Readable.from(buffer),
-            },
-            fields: 'id, webViewLink',
-        });
+        const sanitizedName = fileData.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const fileName = `${sanitizedName}`;
 
-        return response.data.webViewLink || '';
+        const uploadsDir = join(process.cwd(), 'public', 'uploads');
+
+        if (!existsSync(uploadsDir)) {
+            await mkdir(uploadsDir, { recursive: true });
+        }
+
+        const filePath = join(uploadsDir, fileName);
+        await writeFile(filePath, buffer);
+
+        const publicUrl = `/uploads/${fileName}`;
+
+        return publicUrl;
     } catch (error) {
-        console.error('Error uploading file to Drive:', error);
-        return '';
+        throw new Error(`Failed to save file: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
 }
 
@@ -82,30 +66,18 @@ export async function POST(request: NextRequest) {
     try {
         const data: FormData = await request.json();
 
-        if (!data.name || !data.name.trim()) {
-            return NextResponse.json(
-                { error: 'Имя обязательно для заполнения' },
-                { status: 400 }
-            );
-        }
+        const validationErrors = validateFormData({
+            name: data.name,
+            phone: data.phone,
+            email: data.email,
+        });
 
-        if (!data.phone || !data.phone.trim()) {
+        if (Object.keys(validationErrors).length > 0) {
             return NextResponse.json(
-                { error: 'Телефон обязателен для заполнения' },
-                { status: 400 }
-            );
-        }
-
-        if (!validatePhone(data.phone)) {
-            return NextResponse.json(
-                { error: 'Некорректный формат телефона' },
-                { status: 400 }
-            );
-        }
-
-        if (data.email && !validateEmail(data.email)) {
-            return NextResponse.json(
-                { error: 'Некорректный формат email' },
+                {
+                    error: 'Ошибка валидации данных',
+                    fieldErrors: validationErrors
+                },
                 { status: 400 }
             );
         }
@@ -123,7 +95,11 @@ export async function POST(request: NextRequest) {
 
         if (data.file) {
             fileName = data.file.name;
-            fileLink = await uploadFileToDrive(data.file);
+            try {
+                fileLink = await saveFileLocally(data.file);
+            } catch {
+                fileLink = 'Ошибка сохранения файла';
+            }
         }
 
         const values = [
@@ -142,7 +118,7 @@ export async function POST(request: NextRequest) {
                 data.email || '',
                 data.comment || '',
                 fileName,
-                fileLink || (fileName ? 'Файл прикреплен к форме' : 'Нет файла'),
+                fileLink || 'Нет файла',
             ],
         ];
 
@@ -159,9 +135,7 @@ export async function POST(request: NextRequest) {
             { success: true, message: 'Заявка успешно отправлена!' },
             { status: 200 }
         );
-    } catch (error) {
-        console.error('Error submitting form:', error);
-
+    } catch {
         return NextResponse.json(
             { error: 'Ошибка при отправке формы. Попробуйте позже.' },
             { status: 500 }

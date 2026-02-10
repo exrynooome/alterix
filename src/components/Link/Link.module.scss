@@ -45,4 +45,21 @@
   &.large {
     font-size: 24px;
   }
+
+  &.error {
+    color: var(--RED);
+
+    &:focus {
+      text-decoration: underline;
+      color: var(--RED);
+    }
+
+    &:hover {
+      color: var(--RED);
+    }
+
+    &:active {
+      color: var(--RED);
+    }
+  }
 }
