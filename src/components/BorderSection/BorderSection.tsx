@@ -1,10 +1,8 @@
-'use client'
-
 import { FunctionComponent } from "react";
 import styles from './BorderSection.module.scss'
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
-    id: string;
+    id?: string;
     color: 'blue' | 'purple';
 }
 

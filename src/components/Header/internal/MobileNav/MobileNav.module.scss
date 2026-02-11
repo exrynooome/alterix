@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 16px;
+  margin-top: max(16px, env(safe-area-inset-top, 16px));
   height: 52px;
   border-radius: 32px;
   background-color: var(--BG_2);
@@ -45,6 +46,7 @@
   width: 100%;
   min-height: 466px;
   padding: 0 24px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   border-radius: 48px 48px 0 0;
   background-color: var(--BG_3);
   transform: translateY(100%);
@@ -118,10 +120,6 @@
       }
     }
   }
-}
-
-.open {
-
 }
 
 .mobileItems {

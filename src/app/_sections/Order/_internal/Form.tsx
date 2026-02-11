@@ -5,10 +5,10 @@ import styles from "./Form.module.scss";
 import Input from "@/components/Input";
 import FileInput from "@/components/Input/File";
 import Checkbox from "@/components/Checkbox";
-import Link from "@/components/Link";
+import TextLink from "@/components/TextLink";
 import { SubmitButton } from "@/components/Button";
 import { FormErrors, FormSubmitData } from "@/types/form";
-import { validateEmail, validatePhone } from "@/utils/validate";
+import { validateEmail, validatePhone, validateFormData } from "@/utils/validate";
 
 const Form: FunctionComponent = () => {
 
@@ -48,6 +48,23 @@ const Form: FunctionComponent = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const validationErrors = validateFormData({
+            name,
+            phone,
+            email,
+            agreedToPolicy: checked,
+        });
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors({
+                name: validationErrors.name || '',
+                phone: validationErrors.phone || '',
+                email: validationErrors.email || '',
+                checkbox: validationErrors.checkbox || '',
+            });
+            return;
+        }
 
         setErrors({
             name: '',
@@ -114,72 +131,72 @@ const Form: FunctionComponent = () => {
     };
 
     return (
-            <form className={styles.form} onSubmit={handleSubmit} noValidate={true}>
-                <div className={styles.inputs}>
-                    <Input
-                        value={name}
-                        onChange={(value) => {
-                            setName(value);
-                            clearFieldError('name')
-                        }}
-                        type={"text"}
-                        required={true}
-                        placeholder="Имя *"
-                        error={errors.name}
-                    />
-                    <Input
-                        value={phone}
-                        onChange={(value) => {
-                            setPhone(value);
-                            clearFieldError('phone')
-                        }}
-                        validate={validatePhone}
-                        type={"tel"}
-                        required={true}
-                        placeholder="Телефон *"
-                        error={errors.phone}
-                    />
-                    <Input value={email}
-                           onChange={(value) => {
-                               setEmail(value);
-                               clearFieldError('email')
-                           }}
-                           validate={validateEmail}
-                           type={"email"}
-                           required={false}
-                           placeholder="Электронная почта"
-                           error={errors.email}
-                    />
-                    <Input
-                        value={comment}
-                        onChange={setComment}
-                        type={"text"}
-                        required={false}
-                        placeholder="Комментарий"
-                    />
-                    <FileInput
-                        onChange={setFile}
-                        type="file"
-                        required={false}
-                    />
-                </div>
-                <Checkbox
-                    checked={checked}
-                    onChange={(value) => {setChecked(value); if (errors.checkbox) setErrors({ ...errors, checkbox: ''})}}
+        <form className={styles.form} onSubmit={handleSubmit} noValidate={true}>
+            <div className={styles.inputs}>
+                <Input
+                    value={name}
+                    onChange={(value) => {
+                        setName(value);
+                        clearFieldError('name')
+                    }}
+                    type={"text"}
                     required={true}
-                    error={errors.checkbox}
-                >
-                    <p>Я согласен с правилами обработки <span>
-                        <Link size={"medium"} variant={"mainColor"} href={"/"} className={`${styles.checkbox}`} error={errors.checkbox}>
+                    placeholder="Имя *"
+                    error={errors.name}
+                />
+                <Input
+                    value={phone}
+                    onChange={(value) => {
+                        setPhone(value);
+                        clearFieldError('phone')
+                    }}
+                    validate={validatePhone}
+                    type={"tel"}
+                    required={true}
+                    placeholder="Телефон *"
+                    error={errors.phone}
+                />
+                <Input value={email}
+                       onChange={(value) => {
+                           setEmail(value);
+                           clearFieldError('email')
+                       }}
+                       validate={validateEmail}
+                       type={"email"}
+                       required={false}
+                       placeholder="Электронная почта"
+                       error={errors.email}
+                />
+                <Input
+                    value={comment}
+                    onChange={setComment}
+                    type={"text"}
+                    required={false}
+                    placeholder="Комментарий"
+                />
+                <FileInput
+                    onChange={setFile}
+                    type="file"
+                    required={false}
+                />
+            </div>
+            <Checkbox
+                checked={checked}
+                onChange={(value) => {setChecked(value); if (errors.checkbox) setErrors({ ...errors, checkbox: ''})}}
+                required={true}
+                error={errors.checkbox}
+            >
+                <p>Я согласен с правилами обработки <span>
+                        <TextLink size={"medium"} variant={"mainColor"} href={"/"} className={`${styles.checkbox}`} error={errors.checkbox}>
                             персональных данных
-                        </Link>
+                        </TextLink>
                     </span> *</p>
-                </Checkbox>
+            </Checkbox>
 
-                <SubmitButton type="submit">
-                    {isSubmitting ? 'Отправка...' : 'Отправить'}
-                </SubmitButton>
-            </form>
+            <SubmitButton type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Отправка...' : 'Отправить'}
+            </SubmitButton>
+        </form>
     );
 };
 

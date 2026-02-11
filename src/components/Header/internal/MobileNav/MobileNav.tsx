@@ -1,6 +1,6 @@
 'use client'
 
-import {FunctionComponent, useEffect, useRef, useState} from "react";
+import {FunctionComponent, useCallback, useEffect, useRef, useState} from "react";
 import ThemeSelector from "@/components/ThemeSelector";
 import styles from "./MobileNav.module.scss"
 import NavItem from "@/components/Header/internal/NavItem";
@@ -13,39 +13,41 @@ interface Props {
 
 const MobileNav: FunctionComponent<Props> = ({ items }) => {
     const [isOpened, setIsOpen] = useState(false)
-    const [dragStartY, setDragStartY] = useState(0);
-    const [dragOffset, setDragOffset] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const dragStartYRef = useRef(0);
+    const dragOffsetRef = useRef(0);
+    const [dragOffset, setDragOffset] = useState(0);
 
     const toggleMenu = () => {
-        setIsOpen(!isOpened);
+        setIsOpen(prev => !prev);
+        dragOffsetRef.current = 0;
         setDragOffset(0);
     };
 
-    const handleDragStart = (clientY: number) => {
+    const handleDragStart = useCallback((clientY: number) => {
         setIsDragging(true);
-        setDragStartY(clientY);
-    };
+        dragStartYRef.current = clientY;
+    }, []);
 
-    const handleDragMove = (clientY: number) => {
-        if (!isDragging) return;
-
-        const offset = clientY - dragStartY;
+    const handleDragMove = useCallback((clientY: number) => {
+        const offset = clientY - dragStartYRef.current;
         if (offset > 0) {
+            dragOffsetRef.current = offset;
             setDragOffset(offset);
         }
-    };
+    }, []);
 
-    const handleDragEnd = () => {
+    const handleDragEnd = useCallback(() => {
         setIsDragging(false);
 
-        if (dragOffset > 100) {
+        if (dragOffsetRef.current > 100) {
             setIsOpen(false);
         }
 
+        dragOffsetRef.current = 0;
         setDragOffset(0);
-    };
+    }, []);
 
     const handleTouchStart = (e: React.TouchEvent) => {
         handleDragStart(e.touches[0].clientY);
@@ -66,22 +68,22 @@ const MobileNav: FunctionComponent<Props> = ({ items }) => {
     useEffect(() => {
         if (!isDragging) return;
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const onMouseMove = (e: MouseEvent) => {
             handleDragMove(e.clientY);
         };
 
-        const handleMouseUp = () => {
+        const onMouseUp = () => {
             handleDragEnd();
         };
 
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
 
         return () => {
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseup', handleMouseUp);
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
         };
-    }, [isDragging, dragStartY]);
+    }, [isDragging, handleDragMove, handleDragEnd]);
 
     useEffect(() => {
         if (isOpened) {

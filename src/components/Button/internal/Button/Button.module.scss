@@ -20,6 +20,10 @@
   user-select: none;
   cursor: pointer;
   white-space: nowrap;
+  /* Фикс #28: сброс стилей для <button> */
+  border: none;
+  font: inherit;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, width 0.15s ease;
 
   @media (max-width: 959px) {
     width: 100%;

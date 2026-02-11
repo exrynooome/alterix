@@ -5,7 +5,7 @@ import BorderSection from "@/components/BorderSection";
 const Technologies: FunctionComponent = () => {
 
     return (
-        <BorderSection id={""} color={"purple"} className={styles.technologies}>
+        <BorderSection color={"purple"} className={styles.technologies}>
             <div className={styles.container}>
                 <div className={styles.image}>
                     <div className={`${styles.sphere} ${styles.sphere__1}`} />

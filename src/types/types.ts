@@ -1,7 +1,7 @@
 export type NavItems = {
-    id?: string | '';
+    id?: string;
     label: string;
-    href?: string | '/';
+    href?: string;
 }
 
 export type ProjectsCards = {

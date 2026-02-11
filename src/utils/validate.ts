@@ -23,6 +23,10 @@ export const validatePhone = (phone: string): string | undefined => {
 export const validateName = (name: string): string | undefined => {
     if (!name.trim()) return undefined;
 
+    if (name.trim().length < 2) {
+        return 'Имя должно содержать минимум 2 символа';
+    }
+
     return undefined;
 };
 

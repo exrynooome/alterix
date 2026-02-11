@@ -4,21 +4,9 @@ import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { validateFormData } from '@/utils/validate';
+import type { FormSubmitData } from '@/types/form';
 
-interface FormData {
-    name: string;
-    phone: string;
-    email?: string;
-    comment?: string;
-    file?: {
-        name: string;
-        type: string;
-        size: number;
-        data: string;
-    };
-    timestamp: string;
-    agreedToPolicy?: boolean;
-}
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
 async function getGoogleSheetsClient() {
     const auth = new google.auth.GoogleAuth({
@@ -29,43 +17,46 @@ async function getGoogleSheetsClient() {
         scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
-    const sheets = google.sheets({ version: 'v4', auth });
-
-    return sheets;
+    return google.sheets({ version: 'v4', auth });
 }
 
 async function saveFileLocally(fileData: {
-                                            name: string;
-                                            type: string;
-                                            data: string;
-                                         }): Promise<string> {
-    try {
-        const base64Data = fileData.data.split(',')[1];
-        const buffer = Buffer.from(base64Data, 'base64');
-
-        const sanitizedName = fileData.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-        const fileName = `${sanitizedName}`;
-
-        const uploadsDir = join(process.cwd(), 'public', 'uploads');
-
-        if (!existsSync(uploadsDir)) {
-            await mkdir(uploadsDir, { recursive: true });
-        }
-
-        const filePath = join(uploadsDir, fileName);
-        await writeFile(filePath, buffer);
-
-        const publicUrl = `/uploads/${fileName}`;
-
-        return publicUrl;
-    } catch (error) {
-        throw new Error(`Failed to save file: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    name: string;
+    type: string;
+    data: string;
+}): Promise<string> {
+    const base64Data = fileData.data.split(',')[1];
+    if (!base64Data) {
+        throw new Error('Некорректный формат файла');
     }
+
+    const buffer = Buffer.from(base64Data, 'base64');
+
+    const sanitizedName = fileData.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const fileName = `${Date.now()}_${sanitizedName}`;
+
+    const uploadsDir = join(process.cwd(), 'public', 'uploads');
+
+    if (!existsSync(uploadsDir)) {
+        await mkdir(uploadsDir, { recursive: true });
+    }
+
+    const filePath = join(uploadsDir, fileName);
+    await writeFile(filePath, buffer);
+
+    return `/uploads/${fileName}`;
 }
 
 export async function POST(request: NextRequest) {
     try {
-        const data: FormData = await request.json();
+        const data: FormSubmitData = await request.json();
+
+        if (data.file && data.file.size > MAX_FILE_SIZE) {
+            return NextResponse.json(
+                { error: 'Файл слишком большой. Максимум 10 МБ.' },
+                { status: 400 }
+            );
+        }
 
         const validationErrors = validateFormData({
             name: data.name,

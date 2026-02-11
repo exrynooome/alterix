@@ -1,29 +1,24 @@
-'use client'
-
 import { FunctionComponent } from "react";
 import styles from './BgColor.module.scss'
-import useTheme from "@/components/ThemeSelector/internal";
+import ThemeVisibility from "@/components/BgColor/internal";
 
 interface Props {
-    color: 'blue' | 'purple';
+    color: 'blue' | 'purple' | 'darkBlue';
     position?: 'above' | 'below';
+    size?: 'small' | 'normal';
 }
 
-const BgColor: FunctionComponent<Props> = ({ color, position = 'below' }) => {
-    const { theme } = useTheme()
-
-    if (theme === 'light') {
-        return null;
-    }
-
+const BgColor: FunctionComponent<Props> = ({ color, position = 'below', size = 'normal' }) => {
     return (
-        <div className={`${styles.wrapper} ${styles[position]}`}>
-            <div className={`${styles.blurContainer} ${styles[color]}`}>
-                <div className={styles.rectangle} />
-                <div className={`${styles.circle} ${styles.circle__1}`} />
-                <div className={`${styles.circle} ${styles.circle__2}`} />
+        <ThemeVisibility>
+            <div className={`${styles.wrapper} ${styles[position]}`}>
+                <div className={`${styles.blurContainer} ${styles[color]} ${styles[size]}`}>
+                    <div className={styles.rectangle} />
+                    <div className={`${styles.circle} ${styles.circle__1}`} />
+                    <div className={`${styles.circle} ${styles.circle__2}`} />
+                </div>
             </div>
-        </div>
+        </ThemeVisibility>
     )
 }
 

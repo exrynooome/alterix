@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Link.module.scss";
+import styles from "./TextLink.module.scss";
 import Link from "next/link";
 
 type Props = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & {

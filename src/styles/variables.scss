@@ -1,3 +1,12 @@
+@mixin shared-colors {
+  --BLUE: #0064F0;
+  --BLUEHV: #005AE6;
+  --BLUEAC: #0050DC;
+  --RED: #FC392A;
+  --GREEN: #14AE5C;
+  --YELLOW: #FFA500;
+}
+
 @mixin dark-theme {
   --BG_0: rgb(2, 2, 2); // main bg
   --BG_1: rgba(0, 0, 0, 0.24); // secondary bg for filled sections
@@ -9,18 +18,12 @@
   --TX_0: #FFFFFF; // main text
   --TX_1: rgba(255, 255, 255, 0.7); // secondary text
 
-  // colors
-  --BLUE: #0064F0;
-  --BLUEHV: #005AE6;
-  --BLUEAC: #0050DC;
-  --RED: #FC392A;
-  --GREEN: #14AE5C;
-  --YELLOW: #FFA500;
+  @include shared-colors;
 }
 
 @mixin light-theme {
   --BG_0: #FFFFFF; // main bg
-  --BG_1: rgba(0, 0, 0, 0.04); // // secondary bg for filled sections
+  --BG_1: rgba(0, 0, 0, 0.04); // secondary bg for filled sections
   --BG_2: rgba(0, 0, 0, 0.04); // navigation bg
   --BG_3: rgba(0, 0, 0, 0.32); // nav menu bg
 
@@ -29,11 +32,5 @@
   --TX_0: rgb(2, 2, 2); // main text
   --TX_1: rgba(0, 0, 0, 0.5); // secondary text
 
-  // colors
-  --BLUE: #0064F0;
-  --BLUEHV: #005AE6;
-  --BLUEAC: #0050DC;
-  --RED: #FC392A;
-  --GREEN: #14AE5C;
-  --YELLOW: #FFA500;
+  @include shared-colors;
 }

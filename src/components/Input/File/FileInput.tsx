@@ -12,14 +12,14 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCha
 }
 
 const FileInput: React.FC<Props> = ({
-                                    onChange,
-                                    error,
-                                    className = '',
-                                    onBlur,
-                                    required = false,
-                                    ...restProps
+                                        onChange,
+                                        error,
+                                        className = '',
+                                        onBlur,
+                                        required = false,
+                                        ...restProps
 
-                                }) => {
+                                    }) => {
     const [internalError, setInternalError] = useState<string>('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -30,28 +30,31 @@ const FileInput: React.FC<Props> = ({
 
     const handleRemoveFile = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setSelectedFile(null)
+        setSelectedFile(null);
         if (fileInputRef.current) {
-            fileInputRef.current.value = ''
+            fileInputRef.current.value = '';
         }
-        onChange?.(null)
+        onChange?.(null);
+        setInternalError('');
     };
 
-
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0] || null
+        const file = e.target.files?.[0] || null;
 
-        setSelectedFile(file)
-        onChange?.(file)
-    }
+        setSelectedFile(file);
+        onChange?.(file);
+
+        if (file) {
+            setInternalError('');
+        }
+    };
 
     const displayError = error || internalError;
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-
         if (required) {
-            if (e.target.files?.[0] === null) {
-                setInternalError("Выберите файл")
+            if (!e.target.files || e.target.files.length === 0) {
+                setInternalError("Выберите файл");
             }
         }
 
@@ -60,33 +63,33 @@ const FileInput: React.FC<Props> = ({
 
     return (
         <div className={`${styles.input}`}>
-                <div className={`${styles.fileInput} ${styles[className]}`}>
-                    <div className={`${styles.fileInputContainer} ${displayError ? styles.error : ''}`}>
-                        <input
-                            ref={fileInputRef}
-                            onChange={handleFileChange}
-                            onBlur={handleBlur}
-                            type="file"
-                            className={styles.fileField}
-                            {...restProps}
-                        />
-                        {!selectedFile && (
-                            <div className={styles.fileLabel} onClick={handleClick}>
-                                <Icon name={"attachment"} />
-                                <p className={`text_16 ${styles.fileInputLabel}`}>Прикрепить файл</p>
+            <div className={`${styles.fileInput} ${styles[className]}`}>
+                <div className={`${styles.fileInputContainer} ${displayError ? styles.error : ''}`}>
+                    <input
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        onBlur={handleBlur}
+                        type="file"
+                        className={styles.fileField}
+                        {...restProps}
+                    />
+                    {!selectedFile && (
+                        <div className={styles.fileLabel} onClick={handleClick}>
+                            <Icon name={"attachment"} />
+                            <p className={`text_16 ${styles.fileInputLabel}`}>Прикрепить файл</p>
+                        </div>
+                    )}
+                    {selectedFile && (
+                        <div className={styles.fileLabelNamed} onClick={handleClick}>
+                            <div className={styles.text}>
+                                <Icon name={"attachment"} className={styles.fileInputIcon} />
+                                <p className={`text_16 ${styles.fileInputLabel}`}>{selectedFile.name}</p>
                             </div>
-                        )}
-                        {selectedFile && (
-                            <div className={styles.fileLabelNamed} onClick={handleClick}>
-                                <div className={styles.text}>
-                                    <Icon name={"attachment"} className={styles.fileInputIcon} />
-                                    <p className={`text_16 ${styles.fileInputLabel}`}>{selectedFile.name}</p>
-                                </div>
-                                <CancelButton onClick={handleRemoveFile} />
-                            </div>
-                        )}
-                    </div>
+                            <CancelButton onClick={handleRemoveFile} />
+                        </div>
+                    )}
                 </div>
+            </div>
         </div>
     )
 }

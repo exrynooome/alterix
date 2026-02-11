@@ -11,7 +11,8 @@
   }
 
   &.above {
-    top: 0;
+    top: auto;
+    bottom: 0;
   }
 }
 
@@ -39,8 +40,20 @@
     --wave-color: #3660EB;
   }
 
+  &.darkBlue {
+    --wave-color: #011CFF;
+  }
+
+  &.small {
+    height: 500px;
+  }
+
   @media (max-width: 1280px) {
     width: 1440px;
+
+    &.small {
+      height: 450px;
+    }
   }
 
   @media (max-width: 960px) {
@@ -85,6 +98,7 @@
 
 .circle__1 {
   animation: circleMove1 50s ease-in-out infinite;
+  transition: none;
 
   @media (max-width: 1280px) {
     animation: circleMove3 50s ease-in-out infinite;
@@ -93,6 +107,7 @@
 
 .circle__2 {
   animation: circleMove2 50s ease-in-out infinite;
+  transition: none;
 
   @media (max-width: 1280px) {
     animation: circleMove4 50s ease-in-out infinite;

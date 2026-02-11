@@ -6,6 +6,7 @@ import Projects from "@/app/_sections/Projects";
 import Technologies from "@/app/_sections/Technologies";
 import BgColor from "@/components/BgColor";
 import Order from "@/app/_sections/Order";
+import Contacts from "@/app/_sections/Contacts";
 
 export default function Home() {
 
@@ -21,6 +22,8 @@ export default function Home() {
             <Technologies />
             <BgColor color={"purple"} position={"above"} />
             <Order />
+            <BgColor color={"darkBlue"} position={"below"} size={"small"} />
+            <Contacts />
         </Container>
     </div>
   );

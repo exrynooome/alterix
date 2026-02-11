@@ -2,7 +2,7 @@
 
 import React, {useState} from "react";
 import styles from "./Input.module.scss";
-import { IconName } from "@/components/Icons";
+import Icon, { IconName } from "@/components/Icons";
 
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
     value: string;
@@ -61,7 +61,11 @@ const Input: React.FC<Props> = ({
         <div className={`${styles.input}`}>
             <div className={`${styles.baseInput} ${styles[className]}`}>
                 <div className={`${styles.inputContainer} ${displayError ? styles.error : ''}`}>
-                    {leftIcon && (<span className={`${styles.inputIcon} ${styles.left}`}>{leftIcon}</span>)}
+                    {leftIcon &&
+                        (<span className={`${styles.inputIcon} ${styles.left}`}>
+                            <Icon name={leftIcon} />
+                        </span>
+                    )}
                     <input
                         value={value}
                         onChange={handleChange}
@@ -70,7 +74,11 @@ const Input: React.FC<Props> = ({
                         className={`${styles.inputField} ${leftIcon ? styles.left : ''} ${displayError ? styles.error : ''}`}
                         {...restProps}
                     />
-                    {rightIcon && (<span className={`${styles.inputIcon} ${styles.right}`}>{rightIcon}</span>)}
+                    {rightIcon &&
+                        (<span className={`${styles.inputIcon} ${styles.right}`}>
+                            <Icon name={rightIcon} />
+                        </span>
+                    )}
                 </div>
                 <div className={styles.inputFooter}>
                     {displayError && (
