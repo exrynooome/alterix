@@ -65,6 +65,7 @@ const Stages: FunctionComponent = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const { resolvedTheme } = useTheme();
     const [offset, setOffset] = useState(0);
+    const [mounted, setmounted] = useState(false);
 
     const handleNext = () => {
         setCurrentStep(prev => Math.min(prev + 1, stages.length - 1));
@@ -89,16 +90,10 @@ const Stages: FunctionComponent = () => {
     }, [recalculateOffset]);
 
     useEffect(() => {
-        const handleResize = () => recalculateOffset();
+        setmounted(true);
+    }, []);
 
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('orientationchange', handleResize);
-        };
-    }, [recalculateOffset]);
+    if (!mounted) return null;
 
     return (
         <section id="stages" className={styles.stages}>

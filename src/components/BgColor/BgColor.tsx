@@ -11,7 +11,7 @@ interface Props {
 const BgColor: FunctionComponent<Props> = ({ color, position = 'below', size = 'normal' }) => {
     return (
         <ThemeVisibility>
-            <div className={`${styles.wrapper} ${styles[position]}`}>
+            <div className={`${styles.wrapper} ${styles[position]}`} suppressHydrationWarning>
                 <div className={`${styles.blurContainer} ${styles[color]} ${styles[size]}`}>
                     <div className={styles.rectangle} />
                     <div className={`${styles.circle} ${styles.circle__1}`} />
