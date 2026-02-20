@@ -43,9 +43,11 @@
 .menu {
   position: fixed;
   bottom: 0;
+  top: auto;
   width: 100%;
   min-height: 466px;
   padding: 0 24px;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
   border-radius: 48px 48px 0 0;
   background-color: var(--BG_3);
   transform: translateY(150%);
@@ -53,12 +55,11 @@
   box-shadow: inset 0 0 0 1px var(--BR);
   backdrop-filter: blur(32px);
   z-index: 10001;
-  display: none;
+  display: flex;
   flex-direction: column;
 
   &.opened {
     transform: translateY(0);
-    display: flex;
   }
 }
 
