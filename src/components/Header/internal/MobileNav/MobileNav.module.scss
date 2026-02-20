@@ -53,11 +53,12 @@
   box-shadow: inset 0 0 0 1px var(--BR);
   backdrop-filter: blur(32px);
   z-index: 10001;
-  display: flex;
+  display: none;
   flex-direction: column;
 
   &.opened {
     transform: translateY(0);
+    display: flex;
   }
 }
 
