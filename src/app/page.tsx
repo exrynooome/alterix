@@ -22,8 +22,8 @@ export default function Home() {
             <Technologies />
             <BgColor color={"purple"} position={"above"} />
             <Order />
-            <BgColor color={"darkBlue"} position={"below"} size={"small"} />
             <Contacts />
+            <BgColor color={"darkBlue"} position={"above"} size={"small"} />
         </Container>
     </div>
   );

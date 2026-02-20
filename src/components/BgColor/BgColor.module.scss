@@ -45,7 +45,7 @@
   }
 
   &.small {
-    height: 500px;
+    height: 357px;
   }
 
   @media (max-width: 1280px) {
@@ -83,69 +83,90 @@
 
 .circle {
   position: absolute;
-  width: 1000px;
-  height: 500px;
-  border-radius: 1000px;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
   background: var(--wave-color);
-  filter: blur(150px);
-
+  filter: blur(20px);
 
   @media (max-width: 768px) {
-    width: 650px;
-    height: 650px;
+    width: 110px;
+    height: 110px;
+  }
+
+  &.small {
+    height: 75px;
+    top: 50px;
   }
 }
 
 .circle__1 {
   animation: circleMove1 50s ease-in-out infinite;
   transition: none;
+  width: 300px;
+  right: 300px;
+  top: 300px;
 
   @media (max-width: 1280px) {
     animation: circleMove3 50s ease-in-out infinite;
+    width: 150px;
+  }
+
+  @media (max-width: 768px) {
+    width: 110px;
+    height: 110px;
+    right: 200px;
+    top: 200px;
   }
 }
 
 .circle__2 {
   animation: circleMove2 50s ease-in-out infinite;
   transition: none;
+  left: 200px;
+  top: 400px;
 
   @media (max-width: 1280px) {
     animation: circleMove4 50s ease-in-out infinite;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 
 @keyframes circleMove1 {
   0%, 100% {
-    transform: translateX(140%) translateY(20%);
+    transform: translateX(0%) translateY(50%) scale(5);
   }
   50% {
-    transform: translateX(120%) translateY(30%);
+    transform: translateX(100%) translateY(20%) scale(5);
   }
 }
 
 @keyframes circleMove2 {
   0%, 100% {
-    transform: translateX(-20%) translateY(50%);
+    transform: translateX(120%) translateY(50%) scale(5);
   }
   50% {
-    transform: translateX(-50%) translateY(40%);
+    transform: translateX(0) translateY(0) scale(5);
   }
 }
 
 @keyframes circleMove3 {
   0%, 100% {
-    transform: translateX(70%) translateY(-15%);
+    transform: translateX(200%) translateY(0%) scale(5);
   }
   50% {
-    transform: translateX(50%) translateY(0%);
+    transform: translateX(100%) translateY(150%) scale(5);
   }
 }
 
 @keyframes circleMove4 {
   0%, 100% {
-    transform: translateX(-60%) translateY(10%);
+    transform: translateX(-60%) translateY(10%) scale(5);
   }
   50% {
-    transform: translateX(-25%) translateY(20%);
+    transform: translateX(0%) translateY(20%) scale(5);
   }
 }
