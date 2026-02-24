@@ -23,8 +23,8 @@ const Contacts: FunctionComponent = () => {
             <div className={styles.mobile}>
                 <h3>Alterix</h3>
                 <div className={`${styles.links} ${styles.block}`}>
-                    <TextLink size={"large"} variant={"mainColor"} href="/">+7 993 327-27-67</TextLink>
-                    <TextLink size={"large"} variant={"mainColor"} href="/">hello@alterix.ru</TextLink>
+                    <TextLink size={"large"} variant={"mainColor"} href="tel:+79933272767">+7 993 327-27-67</TextLink>
+                    <TextLink size={"large"} variant={"mainColor"} href="mailto:hello@alterix.ru">hello@alterix.ru</TextLink>
                     <TextLink size={"large"} variant={"mainColor"} href="/">Telegram</TextLink>
                 </div>
                 <div className={styles.small_text}>
