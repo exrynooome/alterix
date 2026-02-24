@@ -119,7 +119,7 @@ const MobileNav: FunctionComponent<Props> = ({ items }) => {
 
             <div className={`${styles.menu} ${isOpened ? styles.opened : ''}`} ref={menuRef} style={{transform: isOpened
                     ? `translateY(${dragOffset}px)`
-                    : `translateY(100%)`,
+                    : `translateY(100svh)`,
                 transition: isDragging ? `none` : `transform .2s ease-out`
             }}>
                 <div
