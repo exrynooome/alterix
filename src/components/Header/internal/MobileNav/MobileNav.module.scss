@@ -46,7 +46,8 @@
   top: auto;
   width: 100%;
   min-height: 466px;
-  padding: 0 24px;
+  max-height: 100dvh;
+  padding: 0 24px env(safe-area-inset-bottom);
   border-radius: 48px 48px 0 0;
   background-color: var(--BG_3);
   transform: translateY(100%);
@@ -56,6 +57,10 @@
   z-index: 10001;
   display: flex;
   flex-direction: column;
+
+  will-change: transform;
+  contain: layout paint;
+  isolation: isolate;
 
   &.opened {
     transform: translateY(0);
