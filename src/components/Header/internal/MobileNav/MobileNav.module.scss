@@ -47,10 +47,9 @@
   width: 100%;
   min-height: 466px;
   padding: 0 24px;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
   border-radius: 48px 48px 0 0;
   background-color: var(--BG_3);
-  transform: translateY(150%);
+  transform: translateY(100%);
   transition: transform 300ms ease-in;
   box-shadow: inset 0 0 0 1px var(--BR);
   backdrop-filter: blur(32px);
