@@ -10,5 +10,5 @@ export default function ThemeVisibility({ children }: { children: ReactNode }) {
         return null;
     }
 
-    return <>{children}</>;
+    return <div>{children}</div>;
 }
