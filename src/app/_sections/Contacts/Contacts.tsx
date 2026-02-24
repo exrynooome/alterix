@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FunctionComponent } from "react";
 import styles from "./Contacts.module.scss";
 import TextLink from "@/components/TextLink";
@@ -15,8 +17,8 @@ const Contacts: FunctionComponent = () => {
                     </div>
                 </div>
                 <div className={`${styles.links} ${styles.block}`}>
-                    <TextLink size={"large"} variant={"mainColor"} href="/">+7 993 327-27-67</TextLink>
-                    <TextLink size={"large"} variant={"mainColor"} href="/">hello@alterix.ru</TextLink>
+                    <TextLink size={"large"} variant={"mainColor"} href="#contacts" onClick={() => navigator.clipboard.writeText("+79933272767")}>+7 993 327-27-67</TextLink>
+                    <TextLink size={"large"} variant={"mainColor"} href="#contacts" onClick={() => navigator.clipboard.writeText("hello@alterix.ru")}>hello@alterix.ru</TextLink>
                     <TextLink size={"large"} variant={"mainColor"} href="/">Telegram</TextLink>
                 </div>
             </div>
